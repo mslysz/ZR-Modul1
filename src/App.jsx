@@ -1,3 +1,4 @@
+import { Form } from './components/Form';
 import { LikesCounter } from './components/LikesCounter';
 import { Plot } from './components/Plot';
 
@@ -8,6 +9,7 @@ function App() {
       <h2>Rok produkcji: 1980</h2>
       <LikesCounter />
       <Plot />
+      <Form />
     </>
   );
 }
