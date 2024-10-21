@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import { Review } from './Review';
 const initialReviews = [
   { author: 'Brian', text: 'Najlepszy film ever!', id: 1 },
   { author: 'Amanda', text: 'Widziałam lepsze filmy', id: 2 },
@@ -11,10 +11,7 @@ export const Form = () => {
   const [textareaValue, setTextareaValue] = useState('');
 
   const reviewsElements = reviews.map((r) => (
-    <article key={r.id}>
-      <strong>{r.author}</strong>
-      <p>{r.text}</p>
-    </article>
+    <Review key={r.id} author={r.author} text={r.text} />
   ));
 
   function handleSubmit(e) {
