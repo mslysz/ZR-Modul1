@@ -1,7 +1,13 @@
 import { useState } from 'react';
 
+const initialReviews = [
+  { author: 'Brian', text: 'Najlepszy film ever!', id: 1 },
+  { author: 'Amanda', text: 'Widziałam lepsze filmy', id: 2 },
+];
+
 export const Form = () => {
   const [review, setReview] = useState(null);
+  const [reviews, setReviews] = useState(initialReviews);
   const [inputValue, setInputValue] = useState('');
   const [textareaValue, setTextareaValue] = useState('');
 
@@ -21,6 +27,8 @@ export const Form = () => {
 
   return (
     <>
+      <hr />
+
       {review && (
         <article>
           <strong>{review.author}</strong>
