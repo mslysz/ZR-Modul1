@@ -6,12 +6,16 @@ const initialReviews = [
 ];
 
 export const Form = () => {
-  const [review, setReview] = useState(null);
   const [reviews, setReviews] = useState(initialReviews);
   const [inputValue, setInputValue] = useState('');
   const [textareaValue, setTextareaValue] = useState('');
 
-  console.log(review);
+  const reviewsElements = reviews.map((r) => (
+    <article key={r.id}>
+      <strong>{r.author}</strong>
+      <p>{r.text}</p>
+    </article>
+  ));
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -19,22 +23,18 @@ export const Form = () => {
     const author = inputValue;
     const text = textareaValue;
 
-    setReview({ author, text });
+    setReviews((prevReviews) => {
+      return [{ author, text, id: prevReviews.length + 1 }, ...prevReviews];
+    });
+    setInputValue('');
+    setTextareaValue('');
   }
-
-  console.log('Wartość zmiennej stanowej input:', inputValue);
-  console.log('Wartość zmiennej stanowej textarea:', textareaValue);
 
   return (
     <>
       <hr />
+      <ul>{reviewsElements}</ul>
 
-      {review && (
-        <article>
-          <strong>{review.author}</strong>
-          <p>{review.text}</p>
-        </article>
-      )}
       <h2>Dodaj recenzję</h2>
       <form onSubmit={handleSubmit}>
         <div>
