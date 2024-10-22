@@ -1,18 +1,8 @@
 import { useState } from 'react';
-import { Review } from './Review';
-const initialReviews = [
-  { author: 'Brian', text: 'Najlepszy film ever!', id: 1 },
-  { author: 'Amanda', text: 'Widziałam lepsze filmy', id: 2 },
-];
 
-export const Form = () => {
-  const [reviews, setReviews] = useState(initialReviews);
+export const Form = ({ onReviewSubmit }) => {
   const [inputValue, setInputValue] = useState('');
   const [textareaValue, setTextareaValue] = useState('');
-
-  const reviewsElements = reviews.map((r) => (
-    <Review key={r.id} author={r.author} text={r.text} />
-  ));
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -20,9 +10,7 @@ export const Form = () => {
     const author = inputValue;
     const text = textareaValue;
 
-    setReviews((prevReviews) => {
-      return [{ author, text, id: prevReviews.length + 1 }, ...prevReviews];
-    });
+    onReviewSubmit(author, text);
     setInputValue('');
     setTextareaValue('');
   }
@@ -30,7 +18,6 @@ export const Form = () => {
   return (
     <>
       <hr />
-      <ul>{reviewsElements}</ul>
 
       <h2>Dodaj recenzję</h2>
       <form onSubmit={handleSubmit}>
